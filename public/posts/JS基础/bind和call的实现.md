@@ -1,3 +1,10 @@
+---
+title: Just hack'n
+description: Nothing to see here
+tags: ["gg","aa","cc"]
+categories: ["aa","bb"]
+---
+
 ## Call
 call() 方法使用一个指定的 this 值和单独给出的一个或多个参数来调用一个函数。
 

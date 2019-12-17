@@ -7,28 +7,36 @@ let filePath = path.resolve('./public/posts')
 //调用文件遍历方法
 let filePaths = []
 getReversedFilePaths(filePath)
-filePaths.forEach((path) => {
-    let url = "." + path.split('public')[1].replace(/\\/g, '/')
-    console.log(url)
+
+let fileRouter = [], mTags = [], mCategories = []
+
+filePaths.forEach((filePath) => {
+    let content = fm(fs.readFileSync(filePath, 'utf8'))
+    let { attributes } = content
+    let { tags, categories, title, description } = attributes, url = "." + filePath.split('public')[1].replace(/\\/g, '/')
+    if (!tags || !categories || !title || !description) {
+        throw new Error(`front matter is not correct in ${filePath}`)
+        
+    }
+    tags && tags.forEach((tag) => {
+        if (mTags.filter((mTag) => mTag === tag).length === 0) {
+            mTags.push(tag)
+        }
+    })
+
+    categories && categories.forEach((category) => {
+        if (mCategories.filter((mCategory) => mCategory === category).length === 0) {
+            mCategories.push(category)
+        }
+    })
+
+    fileRouter.push({ tags, categories, title, description, url })
 })
 
-fs.readFile(filePaths[6], 'utf8', function (err, data) {
-    if (err) throw err
+// console.log(mCategories)
+// console.log(mTags)
+console.log(fileRouter)
 
-    var content = fm(data)
-
-    console.log(content)
-})
-
-// readMultipleFiles(new Set(filePaths)).subscribe({
-//     next(data) {
-//         var content = fm(data)
-//         console.log(content)
-//     },
-//     complete() {
-//         console.log('Successfully read all files.');
-//     }
-// })
 
 
 
