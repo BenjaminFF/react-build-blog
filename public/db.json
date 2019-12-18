@@ -1,7 +1,110 @@
 {
-  "posts": [
-    {
-      "title": "hello"
-    }
-  ]
+    "fileRouter": [
+        {
+            "tags": [
+                "gg",
+                "aa",
+                "cc"
+            ],
+            "categories": [
+                "aa",
+                "bb"
+            ],
+            "title": "Just hack'n",
+            "description": "Nothing to see here",
+            "url": "./posts/ewigset设计/jointLean设计.md"
+        },
+        {
+            "tags": [
+                "gg",
+                "aa",
+                "cc"
+            ],
+            "categories": [
+                "aa",
+                "bb"
+            ],
+            "title": "Just hack'n",
+            "description": "Nothing to see here",
+            "url": "./posts/JS基础/bind和call的实现.md"
+        },
+        {
+            "tags": [
+                "gg",
+                "aa",
+                "cc"
+            ],
+            "categories": [
+                "aa",
+                "bb"
+            ],
+            "title": "Just hack'n",
+            "description": "Nothing to see here",
+            "url": "./posts/JS基础/事件.md"
+        },
+        {
+            "tags": [
+                "gg",
+                "aa",
+                "cc"
+            ],
+            "categories": [
+                "aa",
+                "bb"
+            ],
+            "title": "Just hack'n",
+            "description": "Nothing to see here",
+            "url": "./posts/JS基础/函数.md"
+        },
+        {
+            "tags": [
+                "gg",
+                "aa",
+                "cc"
+            ],
+            "categories": [
+                "aa",
+                "bb"
+            ],
+            "title": "Just hack'n",
+            "description": "Nothing to see here",
+            "url": "./posts/JS基础/运算符和类型转换.md"
+        },
+        {
+            "tags": [
+                "gg",
+                "aa",
+                "cc"
+            ],
+            "categories": [
+                "aa",
+                "bb"
+            ],
+            "title": "Just hack'n",
+            "description": "Nothing to see here",
+            "url": "./posts/JS高级/原型的思考.md"
+        },
+        {
+            "tags": [
+                "gg",
+                "aa"
+            ],
+            "categories": [
+                "aa",
+                "bb"
+            ],
+            "title": "Just hack'n",
+            "description": "Nothing to see here",
+            "url": "./posts/小程序/微信小程序笔记.md"
+        }
+    ],
+    "mTags": [
+        "gg",
+        "aa",
+        "cc"
+    ],
+    "mCategories": [
+        "aa",
+        "bb"
+    ]
 }

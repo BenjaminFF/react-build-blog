@@ -16,7 +16,7 @@ filePaths.forEach((filePath) => {
     let { tags, categories, title, description } = attributes, url = "." + filePath.split('public')[1].replace(/\\/g, '/')
     if (!tags || !categories || !title || !description) {
         throw new Error(`front matter is not correct in ${filePath}`)
-        
+
     }
     tags && tags.forEach((tag) => {
         if (mTags.filter((mTag) => mTag === tag).length === 0) {
@@ -33,13 +33,11 @@ filePaths.forEach((filePath) => {
     fileRouter.push({ tags, categories, title, description, url })
 })
 
-// console.log(mCategories)
-// console.log(mTags)
-console.log(fileRouter)
+let data = JSON.stringify({ fileRouter, mTags, mCategories })
 
-
-
-
+fs.writeFile('./public/db.json', data, (err) => {
+    if(err) throw err
+})
 
 function getReversedFilePaths(filePath) {
     //根据文件路径读取文件，返回文件列表
