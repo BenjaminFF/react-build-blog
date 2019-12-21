@@ -1,20 +1,40 @@
-import postPage from '@view/post'
-import main from '@view/main'
+import post from '@view/post'
+import home from '@view/home'
+import categories from '@view/categories'
+import tags from '@view/tags'
+import about from '@view/about'
 
 const routes = [
   {
     path: '/',
     exact: true,
     name: 'index',
-    component: main,
+    component: home,
   },
   {
-    path: '/:postName',
+    path: '/post/:postName',
     name: 'post',
     exact: true,
-    component: postPage,
+    component: post,
   },
-  
+  {
+    path: '/categories',
+    name: 'categories',
+    exact: true,
+    component: categories,
+  },
+  {
+    path: '/tags',
+    name: 'tags',
+    exact: true,
+    component: tags,
+  },
+  {
+    path: '/about',
+    name: 'about',
+    exact: true,
+    component: about,
+  },
 ];
 
 export default routes;

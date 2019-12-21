@@ -5,13 +5,19 @@ import { Visible, Hidden } from 'react-grid-system'
 import cx from 'classnames'
 import zoomTransition from './zoom.module.css'
 import { CSSTransition } from 'react-transition-group'
+import { withRouter } from "react-router-dom"
 
 @inject('global')
 @observer
 class Header extends Component {
     constructor(props) {
         super(props)
+        let { history, global } = this.props, imgUrl = ""
+        global.navItems.forEach((navItem) => {
+            if (navItem.routeUrl === history.location.pathname) imgUrl = navItem.imgUrl
+        })
         this.state = {
+            imgUrl,
             menuVisible: false
         }
     }
@@ -22,16 +28,20 @@ class Header extends Component {
         })
     }
 
+    pushLink(url) {
+        this.props.history.push(url)
+    }
+
     render() {
-        const { siteName, navItems } = this.props.global, { menuVisible } = this.state
+        const { siteName, navItems } = this.props.global, { menuVisible, imgUrl } = this.state
         return (
-            <div className={styles.Header}>
+            <div className={styles.Header} style={{ backgroundImage: `url("${imgUrl}")` }}>
                 <div className={styles.toolBar}>
                     <div className={styles.siteName}>{siteName}</div>
                     <Visible md lg xl>
                         <div className={styles.navContainer}>
                             {navItems && navItems.map((navItem, index) => (
-                                <div className={styles.navItem} key={index}>
+                                <div className={styles.navItem} key={index} onClick={this.pushLink.bind(this, navItem.routeUrl)}>
                                     {navItem.title}
                                 </div>
                             ))}
@@ -47,13 +57,12 @@ class Header extends Component {
                     <CSSTransition classNames={zoomTransition} timeout={200} in={menuVisible} unmountOnExit>
                         <div className={styles.collapseBar}>
                             {navItems && navItems.map((navItem, index) => (
-                                <div className={styles.item} key={index}>
+                                <div className={styles.item} key={index} onClick={this.pushLink.bind(this, navItem.routeUrl)}>
                                     {navItem.title}
                                 </div>
                             ))}
                         </div>
                     </CSSTransition>
-
                 </Visible>
                 <Hidden xs sm><div></div></Hidden>
             </div >
@@ -61,4 +70,4 @@ class Header extends Component {
     }
 }
 
-export default Header
+export default withRouter(Header)

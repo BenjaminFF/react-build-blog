@@ -4,7 +4,7 @@ import styles from './index.module.scss'
 import Header from '@components/Header'
 @inject('global')
 @observer
-class Post extends Component {
+class About extends Component {
     constructor(props) {
         super(props)
     }
@@ -18,10 +18,10 @@ class Post extends Component {
         return (
             <div>
                 <Header></Header>
-                <div>Post</div>
+                <div>About</div>
             </div>
         )
     }
 }
 
-export default Post
+export default About

@@ -4,13 +4,13 @@ import styles from './index.module.scss'
 import Header from '@components/Header'
 @inject('global')
 @observer
-class Main extends Component {
+class Tags extends Component {
     constructor(props) {
         super(props)
     }
 
     componentWillMount() {
-        
+
     }
 
     render() {
@@ -18,16 +18,10 @@ class Main extends Component {
         return (
             <div>
                 <Header></Header>
-                <div>
-                    {posts && posts.map((post, index) => (
-                        <div key={index}>
-                            <p>{post.url}</p>
-                        </div>
-                    ))}
-                </div>
+                <div>Tags</div>
             </div>
         )
     }
 }
 
-export default Main
+export default Tags

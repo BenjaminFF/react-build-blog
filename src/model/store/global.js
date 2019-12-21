@@ -10,10 +10,10 @@ class Global {
     @observable siteName = "BENJAMIN'S BLOG"
 
     @observable navItems = [
-        { title: 'HOME', routeUrl: '', imgUrl: '' },
-        { title: 'TAGS', routeUrl: '', imgUrl: '' },
-        { title: 'CATEGORIES', routeUrl: '', imgUrl: '' },
-        { title: 'ABOUT', routeUrl: '', imgUrl: '' }
+        { title: 'HOME', routeUrl: '/', imgUrl: 'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/the-honest-company-Ua9AK-pZ5cw-unsplash.jpg' },
+        { title: 'TAGS', routeUrl: '/tags', imgUrl: 'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/01@2x%20(3).png' },
+        { title: 'CATEGORIES', routeUrl: '/categories', imgUrl: 'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/01@2x%20(3).png' },
+        { title: 'ABOUT', routeUrl: '/about', imgUrl: 'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/the-honest-company-Ua9AK-pZ5cw-unsplash.jpg' }
     ]
 
     constructor() {
