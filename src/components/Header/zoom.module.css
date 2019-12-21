@@ -1,0 +1,19 @@
+.enter {
+  transform: scale(0);
+  transform-origin: 100% 0;
+}
+
+.enterActive {
+  transform: scale(1);
+  transition: all 200ms ease-out;
+}
+
+.exit {
+  transform: scale(1);
+  transform-origin: 100% 0;
+}
+
+.exitActive {
+  transform: scale(0);
+  transition: all 200ms ease-in;
+}

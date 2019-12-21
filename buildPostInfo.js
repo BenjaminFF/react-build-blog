@@ -8,7 +8,7 @@ let filePath = path.resolve('./public/posts')
 let filePaths = []
 getReversedFilePaths(filePath)
 
-let fileRouter = [], mTags = [], mCategories = []
+let posts = [], mTags = [], mCategories = []
 
 filePaths.forEach((filePath) => {
     let content = fm(fs.readFileSync(filePath, 'utf8'))
@@ -30,13 +30,13 @@ filePaths.forEach((filePath) => {
         }
     })
 
-    fileRouter.push({ tags, categories, title, description, url })
+    posts.push({ tags, categories, title, description, url })
 })
 
-let data = JSON.stringify({ fileRouter, mTags, mCategories })
+let data = JSON.stringify({ posts, mTags, mCategories, pageSize: 10 })
 
 fs.writeFile('./public/db.json', data, (err) => {
-    if(err) throw err
+    if (err) throw err
 })
 
 function getReversedFilePaths(filePath) {
