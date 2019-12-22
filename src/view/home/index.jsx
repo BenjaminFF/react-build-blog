@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import styles from './index.module.scss'
 import Header from '@components/Header'
+import { Row, Col } from 'react-grid-system'
 @inject('global')
 @observer
 class Home extends Component {
@@ -9,17 +10,47 @@ class Home extends Component {
         super(props)
     }
 
-    componentWillMount() {
-
-    }
-
     render() {
-        const { tags, categories, posts } = this.props.global
+        const { tags, categories, posts, pageSize } = this.props.global
         return (
-            <div>
-                <Header></Header>
-                <div>Home</div>
-            </div>
+            <div style={{ width: '100%' }} className={styles.mpZero}>
+                <Header style={{ width: '100%' }}></Header>
+                <Row className={styles.container} style={{ margin: 0 }}>
+                    <Col xl={3} sm={0} xs={0}>
+                    </Col>
+                    <Col xl={4.5} sm={12} xs={12} style={{ padding: '0 2rem', boxSizing: 'border-box' }}>
+                        {posts && posts.map((post, index) => (
+                            <div key={index} className={styles.post}>
+                                <div className={styles.title}>{post.title}</div>
+                                <div className={styles.description}>{post.description}</div>
+                                <div className={styles.tags}>{post.tags && post.tags.map((tag, index) => (
+                                    <p className={styles.tag} key={index}>{tag}</p>
+                                ))}</div>
+                            </div>
+                        ))}
+                    </Col>
+                    <Col xl={1.5} sm={12} xs={12} style={{ marginTop: '2.2rem', padding: '0 2rem', boxSizing: 'border-box' }}>
+                        <div style={{ color: 'gray', marginBottom: '0.5rem', fontWeight: 'bold' }}>TAGS</div>
+                        <div className={styles.tags}>
+                            <div className={styles.tags}>{tags && tags.map((tag, index) => (
+                                <p className={styles.tag} key={index}>{tag}</p>
+                            ))}
+                            </div>
+                        </div>
+                        <div style={{ width: '100%', height: '1px', backgroundColor: 'lightgray', marginTop: '2rem' }}></div>
+                        <div style={{ color: 'gray', marginTop: '2rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>CATEGORIES</div>
+                        <div className={styles.tags}>
+                            <ul className={styles.categories}>{categories && categories.map((tag, index) => (
+                                <li className={styles.category} key={index}>{tag}</li>
+                            ))}
+                            </ul>
+                        </div>
+                        <div style={{ width: '100%', height: '1px', backgroundColor: 'lightgray', marginTop: '2rem' }}></div>
+                    </Col>
+                    <Col xl={3} sm={0} xs={0}>
+                    </Col>
+                </Row>
+            </div >
         )
     }
 }

@@ -1,7 +1,80 @@
-.test{
-    width: 12rem;
-    height: 2rem;
-    .inner{
-        color: blue;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.post {
+  margin-top: 2rem;
+  padding-bottom: 1rem;
+  box-sizing: border-box;
+  border-bottom: 1px solid lightgray;
+  user-select: none;
+  cursor: pointer;
+  &:hover {
+    color: lightseagreen;
+  }
+  .title {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .description {
+    margin-top: 1rem;
+    color: gray;
+    font-size: 0.8rem;
+    font-style: italic;
+    &:hover {
+      color: lightseagreen;
     }
+  }
+}
+
+.tags {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  flex-wrap: wrap;
+  user-select: none;
+  height: fit-content;
+  margin-top: 0.5rem;
+
+  .tag {
+    cursor: pointer;
+    line-height: 1.2rem;
+    display: inline-block;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    border: 1px solid #bdb7b7;
+    border-radius: 0.8rem;
+    font-size: 0.6rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    color: #bdb7b7;
+
+    &:hover {
+      color: lightseagreen;
+      border-color: lightseagreen;
+    }
+  }
+}
+
+.categories {
+  margin-top: 0.5rem;
+  .category {
+    font-size: 0.8rem;
+    color: #bdb7b7;
+    margin-top: 0.4rem;
+    cursor: pointer;
+
+    &:hover {
+      color: lightseagreen;
+    }
+  }
+}
+
+.mpZero {
+  margin: 0;
+  padding: 0;
 }

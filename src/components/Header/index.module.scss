@@ -1,38 +1,40 @@
 .Header {
   width: 100%;
-  height: 20rem;
   position: relative;
   background-repeat: no-repeat;
+  background-size: cover;
+  background-color: lavender;
 }
 
 .toolBar {
   width: 100%;
   height: 3.5rem;
-  background-color: lawngreen;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
   box-sizing: border-box;
   user-select: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
 
-  .siteName {
+  & .siteName {
     font-weight: bold;
-    color: white;
     font-size: 1rem;
     cursor: pointer;
   }
 
-  .navContainer {
+  & .navContainer {
     display: flex;
     .navItem {
       font-weight: bold;
-      color: white;
       font-size: 0.9rem;
       padding-left: 1rem;
       cursor: pointer;
       &:hover {
-        color: lightcyan;
+        color: lightseagreen;
       }
     }
   }
@@ -48,7 +50,7 @@
   padding: 0.5rem 0;
   box-sizing: border-box;
 
-  .item {
+  & .item {
     width: 100%;
     height: 2.5rem;
     color: lightgray;
@@ -60,42 +62,4 @@
     font-weight: bold;
     font-size: 0.8rem;
   }
-}
-
-@keyframes zoomIn {
-  from {
-    transform: scale(0);
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes zoomOut {
-  from {
-    transform: scale(1);
-  }
-
-  to {
-    transform: scale(0);
-  }
-}
-
-.zoomTransitionActive {
-  transform: scale(1);
-}
-
-.zoomTransitionExit {
-  transform: scale(0);
-}
-
-.zoomInRT {
-  transform-origin: 100% 0;
-  animation: zoomIn 0.5s ease-in-out;
-}
-
-.zoomOutRT {
-  transform-origin: 100% 0;
-  animation: zoomOut 0.5s ease-in-out;
 }
