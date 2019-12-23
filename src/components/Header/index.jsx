@@ -30,7 +30,6 @@ class Header extends Component {
         this.setState({
             scrollTop
         })
-        console.log(this.state.scrollTop)
     }
 
     toggleMenu() {
@@ -63,7 +62,10 @@ class Header extends Component {
                             </div>
                         </Visible>
                         <Hidden md lg xl>
-                            <i className="iconfont be-menu" style={{ fontSize: '1.2rem', cursor: 'pointer', color: 'white', marginRight: '-1rem', padding: '1rem' }}
+                            <i className="iconfont be-menu" style={{
+                                fontSize: '1.2rem', cursor: 'pointer', color: 'white', marginRight: '-1rem', padding: '1rem',
+                                color: `rgb(${(1 - scrollTop / 500) * 255}, ${(1 - scrollTop / 500) * 255}, ${(1 - scrollTop / 500) * 255}`
+                            }}
                                 onClick={() => this.toggleMenu()}>
                             </i>
                         </Hidden>

@@ -31,6 +31,41 @@
   }
 }
 
+.bottomPaging {
+  width: 100%;
+  margin: 4rem 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .button {
+    width: fit-content;
+    height: fit-content;
+    padding: 0.8rem 1rem;
+    border: 1px solid gray;
+    color: black;
+    display: flex;
+    align-items: center;
+    user-select: none;
+
+    & i {
+      font-size: 1.2rem;
+      color: black;
+    }
+
+    &:hover {
+      color: white;
+      background-color: lightseagreen;
+      border: 1px solid lightseagreen;
+      cursor: pointer;
+
+      i {
+        color: white;
+      }
+    }
+  }
+}
+
 .tags {
   display: flex;
   align-items: center;

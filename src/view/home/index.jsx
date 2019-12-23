@@ -11,7 +11,7 @@ class Home extends Component {
     }
 
     render() {
-        const { tags, categories, posts, pageSize } = this.props.global
+        const { tags, categories, posts, curPosts, pages, curPage, goNewerPage, goOlderPage } = this.props.global
         return (
             <div style={{ width: '100%' }} className={styles.mpZero}>
                 <Header style={{ width: '100%' }}></Header>
@@ -19,7 +19,7 @@ class Home extends Component {
                     <Col xl={3} sm={0} xs={0}>
                     </Col>
                     <Col xl={4.5} sm={12} xs={12} style={{ padding: '0 2rem', boxSizing: 'border-box' }}>
-                        {posts && posts.map((post, index) => (
+                        {posts && curPosts.map((post, index) => (
                             <div key={index} className={styles.post}>
                                 <div className={styles.title}>{post.title}</div>
                                 <div className={styles.description}>{post.description}</div>
@@ -28,6 +28,19 @@ class Home extends Component {
                                 ))}</div>
                             </div>
                         ))}
+                        <div className={styles.bottomPaging}>
+                            {posts && curPage !== 0 && <div className={styles.button} style={{ position: 'absolute', left: 0 }} onClick={goNewerPage}>
+                                <i className="iconfont be-arrow-right" style={{ transform: 'rotate(180deg)', marginRight: '0.2rem' }}>
+                                </i>
+                                <span>NEWER POST</span>
+                            </div>}
+
+                            {posts && curPage !== pages - 1 && <div className={styles.button} style={{ position: 'absolute', right: 0 }} onClick={goOlderPage}>
+                                <span>OLDER POST</span>
+                                <i className="iconfont be-arrow-right" style={{ marginLeft: '0.2rem' }}>
+                                </i>
+                            </div>}
+                        </div>
                     </Col>
                     <Col xl={1.5} sm={12} xs={12} style={{ marginTop: '2.2rem', padding: '0 2rem', boxSizing: 'border-box' }}>
                         <div style={{ color: 'gray', marginBottom: '0.5rem', fontWeight: 'bold' }}>TAGS</div>

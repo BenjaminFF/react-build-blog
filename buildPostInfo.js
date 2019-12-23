@@ -33,7 +33,7 @@ filePaths.forEach((filePath) => {
     posts.push({ tags, categories, title, description, url })
 })
 
-let data = JSON.stringify({ posts, mTags, mCategories, pageSize: 10 })
+let data = JSON.stringify({ posts, mTags, mCategories})
 
 fs.writeFile('./public/db.json', data, (err) => {
     if (err) throw err
