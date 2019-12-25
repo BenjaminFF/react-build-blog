@@ -7,7 +7,7 @@ class Global {
 
     @observable siteName = "BENJAMIN'S BLOG"
 
-    @observable pageSize = 2
+    @observable pageSize = 5
     @observable curPage = 0
 
 

@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom"
 import fm from 'front-matter'
 import marked from 'marked'
 import { Row, Col } from 'react-grid-system'
+import hljs from 'highlight.js'
 @inject('global')
 @observer
 class Post extends Component {
@@ -14,38 +15,33 @@ class Post extends Component {
         console.log(this.props.history)
         this.state = {
             postUrl: this.props.history.location.pathname
-
         }
     }
 
 
     componentWillMount() {
         let { postUrl } = this.state
-        console.log('/posts' + postUrl.split('post')[1] + '.md')
         fetch('/posts' + postUrl.split('post')[1] + '.md').then((res) => res.text()).then((data) => {
             this.setState({
-                postContent: fm(data).body
+                renderedMD: this.getRenderedMD(fm(data).body)
             })
         })
     }
 
     componentDidMount() {
-        this.hashLinkScroll()
-
+        window.addEventListener('scroll', this.handleScroll.bind(this))
+        // this.hashLinkScroll()
     }
 
-    hashLinkScroll() {
-        const { hash } = window.location
-        if (hash !== '') {
-            // Push onto callback queue so it runs after the DOM is updated,
-            // this is required when navigating from a different page so that
-            // the element is rendered on the page before trying to getElementById.
-            setTimeout(() => {
-                const id = hash.replace('#', '')
-                const element = document.getElementById(id)
-                if (element) element.scrollIntoView()
-            }, 10)
-        }
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll.bind(this))
+    }
+
+    handleScroll() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        this.setState({
+            scrollTop
+        })
     }
 
     getRenderedMD(content) {
@@ -53,11 +49,18 @@ class Post extends Component {
         renderer.heading = (text, level, raw) => {
             index++
             tocArr.push({ text, level, index })
-            return `<h${level} id="h${index}">
+            return `<h${level} id="heading${index}">
                       ${raw}
                     </h${level}>`
         }
-        let renderedMD = marked(content, { renderer })
+        renderer.code = function (code, language) {
+            return '<pre><code class="' + language + '">' +
+                hljs.highlight(language, code).value +
+                '</code></pre>';
+        };
+        let renderedMD = marked(content, {
+            renderer, gfm: true
+        })
         this.renderToc(tocArr)
         return renderedMD
     }
@@ -70,13 +73,23 @@ class Post extends Component {
             p = el
         }
         let el = document.createElement('li')
-        el.innerHTML = tocArr[0].text
+        let a = document.createElement('a')
+        a.href = `#heading${tocArr[0].index}`
+        a.style.color = 'gray'
+        a.style.fontSize = '0.9rem'
+        a.innerHTML = tocArr[0].text
+        el.appendChild(a)
         p.appendChild(el)
         curEL = el
         for (let i = 1; i < tocArr.length; i++) {
             console.log(tocArr[i].level)
             let el = document.createElement('li'), p = curEL.parentNode
-            el.innerHTML = tocArr[i].text
+            let a = document.createElement('a')
+            a.style.color = 'gray'
+            a.style.fontSize = '0.9rem'
+            a.href = `#heading${tocArr[i].index}`
+            a.innerHTML = tocArr[i].text
+            el.appendChild(a)
             if (tocArr[i].level > tocArr[i - 1].level) {
                 let levelGap = tocArr[i].level - tocArr[i - 1].level, tp = curEL
                 while (levelGap-- >= 1) {
@@ -100,21 +113,23 @@ class Post extends Component {
     }
 
     render() {
-        const { postContent } = this.state
+        const { renderedMD, scrollTop } = this.state
         return (
-            <div style={{ width: '100%', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+            <div className={styles.postContainer}>
                 <Header></Header>
-                <Row style={{ width: '100%' }}>
-                    <Col>
+                <Row style={{ width: '100%', position: 'relative', display: 'flex', justifyContent: 'center', margin: 0 }}>
+                    <Col xl={3.5} sm={0} xs={0}></Col>
+                    <Col xl={5} sm={12} xs={12} style={{ position: 'relative', paddingBottom: '6rem', padding: '0rem 1rem', margin: 0, width: '100%' }}>
                         <div>
-                            {postContent && <div dangerouslySetInnerHTML={{ __html: this.getRenderedMD(postContent) }}></div>}
+                            {renderedMD && <div dangerouslySetInnerHTML={{ __html: renderedMD }}></div>}
                         </div>
                     </Col>
-                    <Col>
-                        <div className='toc'></div>
+                    <Col xl={3.5} sm={0} xs={0}>
+                        <div className='toc' style={{ position: scrollTop > 620 ? 'fixed' : 'relative', top: '4.5rem', borderLeft: '1px solid rgb(236, 236, 236)' }}>
+                            <span style={{ fontWeight: 'bold', marginLeft: '1rem' }}>Content</span>
+                        </div>
                     </Col>
                 </Row>
-
             </div>
         )
     }
