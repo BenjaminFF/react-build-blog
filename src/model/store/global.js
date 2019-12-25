@@ -1,5 +1,4 @@
-import { observable, computed, runInAction, action } from 'mobx';
-import { act } from 'react-dom/test-utils';
+import { observable, computed, action } from 'mobx'
 
 class Global {
     @observable tags = []
@@ -8,7 +7,7 @@ class Global {
 
     @observable siteName = "BENJAMIN'S BLOG"
 
-    @observable pageSize = 6
+    @observable pageSize = 2
     @observable curPage = 0
 
 
@@ -20,7 +19,7 @@ class Global {
     ]
 
     constructor() {
-        fetch('./db.json').then((res) => res.json()).then((jsonData) => {
+        fetch('/db.json').then((res) => res.json()).then((jsonData) => {
             this.init(jsonData)
         })
     }

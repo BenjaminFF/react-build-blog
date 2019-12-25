@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import styles from './index.module.scss'
 import Header from '@components/Header'
 import { Row, Col } from 'react-grid-system'
+import { withRouter } from "react-router-dom"
 @inject('global')
 @observer
 class Home extends Component {
@@ -10,8 +11,13 @@ class Home extends Component {
         super(props)
     }
 
+    pushLink(pathname) {
+        this.props.history.push({ pathname })
+    }
+
     render() {
         const { tags, categories, posts, curPosts, pages, curPage, goNewerPage, goOlderPage } = this.props.global
+        console.log(posts)
         return (
             <div style={{ width: '100%' }} className={styles.mpZero}>
                 <Header style={{ width: '100%' }}></Header>
@@ -20,7 +26,7 @@ class Home extends Component {
                     </Col>
                     <Col xl={4.5} sm={12} xs={12} style={{ padding: '0 2rem', boxSizing: 'border-box' }}>
                         {posts && curPosts.map((post, index) => (
-                            <div key={index} className={styles.post}>
+                            <div key={index} className={styles.post} onClick={this.pushLink.bind(this, '/post' + post.url.split('.')[0])}>
                                 <div className={styles.title}>{post.title}</div>
                                 <div className={styles.description}>{post.description}</div>
                                 <div className={styles.tags}>{post.tags && post.tags.map((tag, index) => (
@@ -68,4 +74,4 @@ class Home extends Component {
     }
 }
 
-export default Home
+export default withRouter(Home)
