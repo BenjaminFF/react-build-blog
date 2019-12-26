@@ -5,7 +5,7 @@ import Header from '@components/Header'
 import { withRouter } from "react-router-dom"
 import fm from 'front-matter'
 import marked from 'marked'
-import { Row, Col } from 'react-grid-system'
+import { Row, Col, Visible, Hidden } from 'react-grid-system'
 import hljs from 'highlight.js'
 @inject('global')
 @observer
@@ -30,11 +30,26 @@ class Post extends Component {
 
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll.bind(this))
-        // this.hashLinkScroll()
+        this.hashLinkScroll()
+        console.log('componentDidMount')
     }
 
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll.bind(this))
+    }
+
+    hashLinkScroll() {
+        const { hash } = window.location
+        if (hash !== '') {
+            // Push onto callback queue so it runs after the DOM is updated,
+            // this is required when navigating from a different page so that
+            // the element is rendered on the page before trying to getElementById.
+            setTimeout(() => {
+                const id = hash.replace('#', '')
+                const element = document.getElementById(id)
+                if (element) element.scrollIntoView()
+            }, 10)
+        }
     }
 
     handleScroll() {
@@ -54,6 +69,7 @@ class Post extends Component {
                     </h${level}>`
         }
         renderer.code = function (code, language) {
+            language = language || 'js'
             return '<pre><code class="' + language + '">' +
                 hljs.highlight(language, code).value +
                 '</code></pre>';
@@ -109,7 +125,7 @@ class Post extends Component {
             curEL = el
         }
 
-        document.getElementsByClassName('toc')[0].appendChild(root)
+        document.getElementsByClassName('toc').length > 0 && document.getElementsByClassName('toc')[0].appendChild(root)
     }
 
     render() {
@@ -125,9 +141,12 @@ class Post extends Component {
                         </div>
                     </Col>
                     <Col xl={3.5} sm={0} xs={0}>
-                        <div className='toc' style={{ position: scrollTop > 620 ? 'fixed' : 'relative', top: '4.5rem', borderLeft: '1px solid rgb(236, 236, 236)' }}>
-                            <span style={{ fontWeight: 'bold', marginLeft: '1rem' }}>Content</span>
-                        </div>
+                        <Visible md lg xl>
+                            <div className='toc' style={{ position: scrollTop > 620 ? 'fixed' : 'relative', top: '4.5rem', borderLeft: '1px solid rgb(236, 236, 236)' }}>
+                                <span style={{ fontWeight: 'bold', marginLeft: '1rem' }}>Content</span>
+                            </div>
+                        </Visible>
+                        <Hidden md lg xl><div></div></Hidden>
                     </Col>
                 </Row>
             </div>

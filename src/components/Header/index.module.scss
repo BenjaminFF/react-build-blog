@@ -41,7 +41,7 @@
 }
 
 .collapseBar {
-  position: absolute;
+  position: fixed;
   right: 1rem;
   top: 3.5rem;
   width: 8rem;
@@ -49,6 +49,8 @@
   user-select: none;
   padding: 0.5rem 0;
   box-sizing: border-box;
+  z-index: 1;
+  box-shadow: 0 0 10px rgb(143, 143, 143);
 
   & .item {
     width: 100%;
