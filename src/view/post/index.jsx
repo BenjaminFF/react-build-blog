@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { autorun, reaction } from 'mobx'
 import styles from './index.module.scss'
 import Header from '@components/Header'
 import { withRouter } from "react-router-dom"
@@ -12,26 +13,36 @@ import hljs from 'highlight.js'
 class Post extends Component {
     constructor(props) {
         super(props)
-        console.log(this.props.history)
         this.state = {
-            postUrl: this.props.history.location.pathname
+            postId: this.props.match.params.postId
         }
     }
 
 
     componentWillMount() {
-        let { postUrl } = this.state
-        fetch('/posts' + postUrl.split('post')[1] + '.md').then((res) => res.text()).then((data) => {
-            this.setState({
-                renderedMD: this.getRenderedMD(fm(data).body)
-            })
+        autorun((reaction) => {
+            let { postId } = this.state, { getPostContent, posts } = this.props.global
+            if (posts.length >= 1) {
+                getPostContent(postId)
+                reaction.dispose()
+            }
         })
+
     }
 
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll.bind(this))
         this.hashLinkScroll()
-        console.log('componentDidMount')
+        autorun(reaction => {
+            let { loadingPost, postContent, posts } = this.props.global
+            if (!loadingPost && posts.length >= 1) {
+                let renderedMD = this.getRenderedMD(fm(postContent).body)
+                this.setState({
+                    renderedMD
+                })
+                reaction.dispose()
+            }
+        })
     }
 
     componentWillUnmount() {
@@ -60,6 +71,7 @@ class Post extends Component {
     }
 
     getRenderedMD(content) {
+        console.log('getRenderedMD')
         let renderer = new marked.Renderer(), index = 1, tocArr = []
         renderer.heading = (text, level, raw) => {
             index++
@@ -124,12 +136,11 @@ class Post extends Component {
             p.appendChild(el)
             curEL = el
         }
-
         document.getElementsByClassName('toc').length > 0 && document.getElementsByClassName('toc')[0].appendChild(root)
     }
 
     render() {
-        const { renderedMD, scrollTop } = this.state
+        const { renderedMD, scrollTop } = this.state, { loadingPost } = this.props.global
         return (
             <div className={styles.postContainer}>
                 <Header></Header>
@@ -137,7 +148,7 @@ class Post extends Component {
                     <Col xl={3.5} sm={0} xs={0}></Col>
                     <Col xl={5} sm={12} xs={12} style={{ position: 'relative', paddingBottom: '6rem', padding: '0rem 1rem', margin: 0, width: '100%' }}>
                         <div>
-                            {renderedMD && <div dangerouslySetInnerHTML={{ __html: renderedMD }}></div>}
+                            <div dangerouslySetInnerHTML={{ __html: renderedMD }}></div>
                         </div>
                     </Col>
                     <Col xl={3.5} sm={0} xs={0}>

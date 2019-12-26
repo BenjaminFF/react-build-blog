@@ -12,7 +12,7 @@ const routes = [
     component: home,
   },
   {
-    path: '/post/:category/:title',
+    path: '/post/:postId',
     name: 'post',
     exact: true,
     component: post,

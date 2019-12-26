@@ -9,13 +9,15 @@ class Global {
 
     @observable pageSize = 5
     @observable curPage = 0
+    @observable postContent = ''
+    @observable loadingPost = true
 
 
     @observable navItems = [
-        { title: 'HOME', routeUrl: '/', imgUrl: 'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/blog-header1.jpg' },
-        { title: 'TAGS', routeUrl: '/tags', imgUrl: 'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/blog-header2.jpg' },
-        { title: 'CATEGORIES', routeUrl: '/categories', imgUrl: 'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/blog-header3.jpg' },
-        { title: 'ABOUT', routeUrl: '/about', imgUrl: 'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/blog-header4.jpg' }
+        { title: 'HOME', routeUrl: '/', imgUrl: 'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/wide_figure1.jpg' },
+        { title: 'TAGS', routeUrl: '/tags', imgUrl: 'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/wide_figure2.jpg' },
+        { title: 'CATEGORIES', routeUrl: '/categories', imgUrl: 'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/wide_figure3.jpg' },
+        { title: 'ABOUT', routeUrl: '/about', imgUrl: 'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/wide_figure4.jpg' }
     ]
 
     constructor() {
@@ -50,6 +52,16 @@ class Global {
     @action.bound
     goOlderPage() {
         this.curPage++
+    }
+
+    @action.bound
+    getPostContent(postId) {
+        this.loadingPost = true
+        let postUrl = this.posts.filter((post) => post.id === postId)[0].url
+        fetch(postUrl).then((res) => res.text()).then((data) => {
+            this.postContent = data
+            this.loadingPost = false
+        })
     }
 }
 

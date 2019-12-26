@@ -31,7 +31,6 @@ class Header extends Component {
     componentDidMount() {
         setTimeout(() => {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-            console.log(scrollTop)
             if (scrollTop < 10) {
                 this.setState({
                     toolBarVisible: true
