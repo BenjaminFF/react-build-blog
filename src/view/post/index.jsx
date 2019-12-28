@@ -110,7 +110,6 @@ class Post extends Component {
         p.appendChild(el)
         curEL = el
         for (let i = 1; i < tocArr.length; i++) {
-            console.log(tocArr[i].level)
             let el = document.createElement('li'), p = curEL.parentNode
             let a = document.createElement('a')
             a.style.color = 'gray'
@@ -140,7 +139,7 @@ class Post extends Component {
     }
 
     render() {
-        const { renderedMD, scrollTop } = this.state, { loadingPost } = this.props.global
+        const { renderedMD, scrollTop } = this.state
         return (
             <div className={styles.postContainer}>
                 <Header></Header>

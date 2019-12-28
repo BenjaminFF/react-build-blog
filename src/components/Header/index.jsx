@@ -12,10 +12,18 @@ import { withRouter } from "react-router-dom"
 class Header extends Component {
     constructor(props) {
         super(props)
-        let { history, global } = this.props, imgUrl = ""
-        global.navItems.forEach((navItem) => {
-            if (navItem.routeUrl === history.location.pathname) imgUrl = navItem.imgUrl
+
+        let { location, global, match } = this.props, imgUrl = "", { navItems, posts, imgUrls } = global, { pathname } = location, { postId } = match.params
+
+        navItems.forEach((navItem) => {
+            if (navItem.routeUrl === pathname) imgUrl = navItem.imgUrl
         })
+
+        imgUrl && posts.forEach((post) => {
+            if (post.id === postId) imgUrl = post.image
+        })
+
+        imgUrl = imgUrl || imgUrls[Math.floor(imgUrls.length * Math.random())]
         this.state = {
             imgUrl,
             preScrollTop: 0,

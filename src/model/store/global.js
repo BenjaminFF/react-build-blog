@@ -20,6 +20,15 @@ class Global {
         { title: 'ABOUT', routeUrl: '/about', imgUrl: 'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/wide_figure4.jpg' }
     ]
 
+    @observable imgUrls = [
+        'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/wide_figure1.jpg',
+        'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/wide_figure2.jpg',
+        'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/wide_figure3.jpg',
+        'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/wide_figure4.jpg',
+        'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/wide_figure5.jpg',
+        'https://raw.githubusercontent.com/BenjaminFF/picbed/master/imgs/wide_figure6.jpg'
+    ]
+
     constructor() {
         fetch('/db.json').then((res) => res.json()).then((jsonData) => {
             this.init(jsonData)

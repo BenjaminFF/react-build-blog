@@ -14,7 +14,7 @@ let posts = [], mTags = [], mCategories = []
 filePaths.forEach((filePath) => {
     let content = fm(fs.readFileSync(filePath, 'utf8'))
     let { attributes } = content
-    let { tags, categories, title, description } = attributes, url = filePath.split('public')[1].replace(/\\/g, '/')
+    let { tags, categories, title, description, image = '' } = attributes, url = filePath.split('public')[1].replace(/\\/g, '/')
     if (!tags || !categories || !title || !description) {
         throw new Error(`front matter is not correct in ${filePath}`)
 
@@ -31,7 +31,7 @@ filePaths.forEach((filePath) => {
         }
     })
 
-    posts.push({ tags, categories, title, description, url, id: uniqid() })
+    posts.push({ tags, categories, title, description, url, id: uniqid(), image })
 })
 
 let data = JSON.stringify({ posts, mTags, mCategories })
