@@ -71,7 +71,6 @@ class Post extends Component {
     }
 
     getRenderedMD(content) {
-        console.log('getRenderedMD')
         let renderer = new marked.Renderer(), index = 1, tocArr = []
         renderer.heading = (text, level, raw) => {
             index++
@@ -100,8 +99,7 @@ class Post extends Component {
             p.appendChild(el)
             p = el
         }
-        let el = document.createElement('li')
-        let a = document.createElement('a')
+        let el = document.createElement('li'), a = document.createElement('a')
         a.href = `#heading${tocArr[0].index}`
         a.style.color = 'gray'
         a.style.fontSize = '0.9rem'
@@ -110,8 +108,7 @@ class Post extends Component {
         p.appendChild(el)
         curEL = el
         for (let i = 1; i < tocArr.length; i++) {
-            let el = document.createElement('li'), p = curEL.parentNode
-            let a = document.createElement('a')
+            let el = document.createElement('li'), p = curEL.parentNode, a = document.createElement('a')
             a.style.color = 'gray'
             a.style.fontSize = '0.9rem'
             a.href = `#heading${tocArr[i].index}`
