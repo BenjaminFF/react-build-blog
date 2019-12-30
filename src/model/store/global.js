@@ -68,7 +68,6 @@ class Global {
         this.loadingPost = true
         let postUrl = this.posts.filter((post) => post.id === postId)[0].url
         fetch(postUrl, { mode: 'cors' }).then((res) => res.text()).then((data) => {
-            console.log(data)
             this.postContent = data
             this.loadingPost = false
         })

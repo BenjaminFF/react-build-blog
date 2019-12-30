@@ -12,9 +12,11 @@ import { withRouter } from "react-router-dom"
 class Header extends Component {
     constructor(props) {
         super(props)
+        this.init.bind(this)
+    }
 
-        let { location, global, match } = this.props, imgUrl = "", { navItems, posts, imgUrls } = global, { pathname } = location, { postId } = match.params
-
+    init() {
+        let { history, global, match } = this.props, imgUrl = "", { navItems, posts, imgUrls } = global, { pathname } = history.location, { postId } = match.params
         navItems.forEach((navItem) => {
             if (navItem.routeUrl === pathname) imgUrl = navItem.imgUrl
         })
@@ -24,27 +26,34 @@ class Header extends Component {
         })
 
         imgUrl = imgUrl || imgUrls[Math.floor(imgUrls.length * Math.random())]
-        this.state = {
+
+        console.log(this.props)
+
+        this.setState({
             imgUrl,
             preScrollTop: 0,
             menuVisible: false,
             toolBarVisible: false
-        }
-    }
-
-    componentWillMount() {
-        window.addEventListener('scroll', this.handleScroll.bind(this))
-    }
-
-    componentDidMount() {
+        })
         setTimeout(() => {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-            if (scrollTop < 10) {
+            let { hash } = this.props.location
+            if (!hash) {
                 this.setState({
                     toolBarVisible: true
                 })
             }
-        }, 20)
+        }, 10)
+    }
+
+    componentWillMount() {
+        this.init()
+        window.addEventListener('scroll', this.handleScroll.bind(this))
+    }
+
+    componentDidMount() {
+        this.props.history.listen(() => {
+            this.init()
+        })
     }
 
     componentWillUnmount() {
@@ -69,6 +78,9 @@ class Header extends Component {
 
     pushLink(url) {
         this.props.history.push(url)
+        this.setState({
+            menuVisible: !this.state.menuVisible
+        })
     }
 
     render() {
@@ -76,7 +88,7 @@ class Header extends Component {
         return (
             <ScreenClassRender render={screenClass => (
                 <div className={styles.Header} style={{ height: ['md', 'xl', 'lg'].includes(screenClass) ? '40rem' : '20rem', backgroundImage: `url("${imgUrl}")` }}>
-                    <CSSTransition classNames={slideVertical} timeout={preScrollTop > 10 ? 200 : 0} in={toolBarVisible} unmountOnExit>
+                    <CSSTransition classNames={slideVertical} timeout={200} in={toolBarVisible} unmountOnExit>
                         < div className={styles.toolBar} style={{
                             backgroundColor: `rgba(255, 255, 255, ${preScrollTop / 2000})`,
                             borderBottom: `1px solid rgba(211, 211, 211, ${-0.2 + preScrollTop / 1000})`,

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import styles from './index.module.scss'
-import Header from '@components/Header'
 @inject('global')
 @observer
 class Categories extends Component {
@@ -17,7 +16,6 @@ class Categories extends Component {
         const { tags, categories, posts } = this.props.global
         return (
             <div>
-                <Header></Header>
                 <div>Categories</div>
             </div>
         )

@@ -23,7 +23,6 @@ class Home extends Component {
         const { tags, categories, posts, curPosts, pages, curPage, goNewerPage, goOlderPage } = this.props.global
         return (
             <div style={{ width: '100%' }} className={styles.mpZero}>
-                <Header style={{ width: '100%' }}></Header>
                 <Row className={styles.container} style={{ margin: 0 }}>
                     <Col xl={3} sm={0} xs={0}>
                     </Col>

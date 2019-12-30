@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
-import { autorun, reaction } from 'mobx'
+import { autorun } from 'mobx'
 import styles from './index.module.scss'
-import Header from '@components/Header'
 import { withRouter } from "react-router-dom"
 import fm from 'front-matter'
 import marked from 'marked'
@@ -32,7 +31,6 @@ class Post extends Component {
 
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll.bind(this))
-        this.hashLinkScroll()
         autorun(reaction => {
             let { loadingPost, postContent, posts } = this.props.global
             if (!loadingPost && posts.length >= 1) {
@@ -40,6 +38,7 @@ class Post extends Component {
                 this.setState({
                     renderedMD
                 })
+                this.hashLinkScroll()
                 reaction.dispose()
             }
         })
@@ -139,7 +138,6 @@ class Post extends Component {
         const { renderedMD, scrollTop } = this.state
         return (
             <div className={styles.postContainer}>
-                <Header></Header>
                 <Row style={{ width: '100%', position: 'relative', display: 'flex', justifyContent: 'center', margin: 0 }}>
                     <Col xl={3.5} sm={0} xs={0}></Col>
                     <Col xl={5} sm={12} xs={12} style={{ position: 'relative', paddingBottom: '6rem', padding: '0rem 1rem', margin: 0, width: '100%' }}>

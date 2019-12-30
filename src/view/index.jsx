@@ -8,10 +8,13 @@ import { Provider } from 'mobx-react'
 import {
     BrowserRouter as Router, Route, Switch,
 } from 'react-router-dom'
+import Rocket from '@components/Rocket'
+import Header from '@components/Header'
 
 ReactDOM.render(
     <Provider {...stores}>
         <Router>
+            <Header></Header>
             <Switch>
                 {routes.map((route, index) => (
                     <Route
@@ -23,6 +26,7 @@ ReactDOM.render(
                 ))}
             </Switch>
         </Router>
+        <Rocket></Rocket>
     </Provider>,
     document.getElementById('root'))
 
