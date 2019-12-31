@@ -1,18 +1,12 @@
 .postContainer {
   width: "100%";
   overflow: hidden;
-
+  letter-spacing: 0.5px;
   & p,
   li {
-    line-height: 1.5rem;
+    line-height: 1.7rem;
     font-size: 0.95rem;
-  }
-
-  ul,
-  li {
-    text-decoration: none;
-    list-style: none;
-    // padding-left: 1rem;
+    color: #404040;
   }
 
   ul {
@@ -64,7 +58,7 @@
     background-color: #f2f2f2;
   }
 
-  tr:nth-child(odd){
+  tr:nth-child(odd) {
     background-color: #fcfcfc;
   }
 

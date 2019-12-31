@@ -6,8 +6,6 @@ tags: ["设计","ewigset"]
 categories: ["ewigset设计"]
 ---
 
-toc
-
 ## 大概流程
 初始化卡片，根据每张卡片的学习状态来判断jointLearn的状态。如果有未学习的卡片，就组装一轮卡片（每轮默认有7张卡片）。
 

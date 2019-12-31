@@ -12,7 +12,7 @@ class Home extends Component {
     }
 
     componentWillMount() {
-        
+
     }
 
     pushLink(pathname) {
@@ -22,7 +22,7 @@ class Home extends Component {
     render() {
         const { tags, categories, posts, curPosts, pages, curPage, goNewerPage, goOlderPage } = this.props.global
         return (
-            <div style={{ width: '100%' }} className={styles.mpZero}>
+            <div style={{ width: '100%' }}>
                 <Row className={styles.container} style={{ margin: 0 }}>
                     <Col xl={3} sm={0} xs={0}>
                     </Col>
@@ -52,20 +52,16 @@ class Home extends Component {
                     </Col>
                     <Col xl={1.5} sm={12} xs={12} style={{ marginTop: '2.2rem', padding: '0 2rem', boxSizing: 'border-box' }}>
                         <div style={{ color: 'gray', marginBottom: '0.5rem', fontWeight: 'bold' }}>TAGS</div>
-                        <div className={styles.tags}>
-                            <div className={styles.tags}>{tags && tags.map((tag, index) => (
-                                <p className={styles.tag} key={index}>{tag}</p>
-                            ))}
-                            </div>
+                        <div className={styles.tags}>{tags && tags.map((tag, index) => (
+                            <p className={styles.tag} key={index}>{tag}</p>
+                        ))}
                         </div>
                         <div style={{ width: '100%', height: '1px', backgroundColor: 'lightgray', marginTop: '2rem' }}></div>
-                        <div style={{ color: 'gray', marginTop: '2rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>CATEGORIES</div>
-                        <div className={styles.tags}>
-                            <ul className={styles.categories}>{categories && categories.map((tag, index) => (
-                                <li className={styles.category} key={index}>{tag}</li>
-                            ))}
-                            </ul>
-                        </div>
+                        <div style={{ color: 'gray', marginTop: '2rem', marginBottom: '1rem', fontWeight: 'bold' }}>CATEGORIES</div>
+                        <ul className={styles.categories}>{categories && categories.map((item, index) => (
+                            <li className={styles.category} key={index}>{item}</li>
+                        ))}
+                        </ul>
                         <div style={{ width: '100%', height: '1px', backgroundColor: 'lightgray', marginTop: '2rem' }}></div>
                     </Col>
                     <Col xl={3} sm={0} xs={0}>

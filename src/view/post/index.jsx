@@ -98,7 +98,9 @@ class Post extends Component {
             p.appendChild(el)
             p = el
         }
+        root.style.listStyle = 'none'
         let el = document.createElement('li'), a = document.createElement('a')
+        el.style.listStyle = 'none'
         a.href = `#heading${tocArr[0].index}`
         a.style.color = 'gray'
         a.style.fontSize = '0.9rem'
@@ -108,6 +110,7 @@ class Post extends Component {
         curEL = el
         for (let i = 1; i < tocArr.length; i++) {
             let el = document.createElement('li'), p = curEL.parentNode, a = document.createElement('a')
+            el.style.listStyle = 'none'
             a.style.color = 'gray'
             a.style.fontSize = '0.9rem'
             a.href = `#heading${tocArr[i].index}`
@@ -140,7 +143,7 @@ class Post extends Component {
             <div className={styles.postContainer}>
                 <Row style={{ width: '100%', position: 'relative', display: 'flex', justifyContent: 'center', margin: 0 }}>
                     <Col xl={3.5} sm={0} xs={0}></Col>
-                    <Col xl={5} sm={12} xs={12} style={{ position: 'relative', paddingBottom: '6rem', padding: '0rem 1rem', margin: 0, width: '100%' }}>
+                    <Col xl={5} sm={12} xs={12} style={{ position: 'relative', paddingBottom: '6rem', padding: '3rem 1rem', margin: 0, width: '100%' }}>
                         <div>
                             <div dangerouslySetInnerHTML={{ __html: renderedMD }}></div>
                         </div>
