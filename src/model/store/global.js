@@ -53,6 +53,18 @@ class Global {
         return posts.slice(curPage * pageSize, curPage !== pages - 1 ? (curPage + 1) * pageSize : total)
     }
 
+    @computed get tagedPosts() {
+        let { posts, tags } = this
+        let tagedPosts = []
+        tags.forEach((tag) => {
+            tagedPosts.push({
+                tag: tag,
+                posts: posts.filter((post) => post.tags.filter((mTag) => mTag === tag).length > 0)
+            })
+        })
+        return tagedPosts
+    }
+
     @action.bound
     goNewerPage() {
         this.curPage--

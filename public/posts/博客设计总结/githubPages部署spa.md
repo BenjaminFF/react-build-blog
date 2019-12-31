@@ -1,7 +1,7 @@
 ---
 title: githubPages部署spa
 description: GitHub Pages原生不支持单页面应用。当这里有一个带有前端路由的新页面加载的时候(例如example.tld/foo)，因为/foo是前端路由，而GitHubPages服务器会把/foo作为后端路由来处理，因为在服务器找不到/foo这个路由所对应的文件，GitHubP......
-tags: ["blog", "spa"]
+tags: ["blog", "spa","github"]
 categories: ["JavaScript","Github Page"]
 date: 2019-12-30
 ---

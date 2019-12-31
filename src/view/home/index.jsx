@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import styles from './index.module.scss'
-import Header from '@components/Header'
 import { Row, Col } from 'react-grid-system'
 import { withRouter } from "react-router-dom"
 @inject('global')
@@ -9,10 +8,6 @@ import { withRouter } from "react-router-dom"
 class Home extends Component {
     constructor(props) {
         super(props)
-    }
-
-    componentWillMount() {
-
     }
 
     pushLink(pathname) {
@@ -50,7 +45,7 @@ class Home extends Component {
                             </div>}
                         </div>
                     </Col>
-                    <Col xl={1.5} sm={12} xs={12} style={{ marginTop: '2.2rem', padding: '0 2rem', boxSizing: 'border-box' }}>
+                    <Col xl={1.5} sm={12} xs={12} style={{ marginTop: '2.2rem', padding: '0 1rem', boxSizing: 'border-box' }}>
                         <div style={{ color: 'gray', marginBottom: '0.5rem', fontWeight: 'bold' }}>TAGS</div>
                         <div className={styles.tags}>{tags && tags.map((tag, index) => (
                             <p className={styles.tag} key={index}>{tag}</p>

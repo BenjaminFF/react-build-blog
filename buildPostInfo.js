@@ -17,7 +17,6 @@ filePaths.forEach((filePath) => {
     let { tags, categories, title, description, image = '' } = attributes, url = filePath.split('public')[1].replace(/\\/g, '/')
     if (!tags || !categories || !title || !description) {
         throw new Error(`front matter is not correct in ${filePath}`)
-
     }
     tags && tags.forEach((tag) => {
         if (mTags.filter((mTag) => mTag === tag).length === 0) {

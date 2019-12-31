@@ -5,7 +5,7 @@ import styles from './index.module.scss'
 import { withRouter } from "react-router-dom"
 import fm from 'front-matter'
 import marked from 'marked'
-import { Row, Col, Visible, Hidden } from 'react-grid-system'
+import { Row, Col, Visible, Hidden, ScreenClassRender } from 'react-grid-system'
 import hljs from 'highlight.js'
 @inject('global')
 @observer
@@ -142,19 +142,22 @@ class Post extends Component {
         return (
             <div className={styles.postContainer}>
                 <Row style={{ width: '100%', position: 'relative', display: 'flex', justifyContent: 'center', margin: 0 }}>
-                    <Col xl={3.5} sm={0} xs={0}></Col>
-                    <Col xl={5} sm={12} xs={12} style={{ position: 'relative', paddingBottom: '6rem', padding: '3rem 1rem', margin: 0, width: '100%' }}>
-                        <div>
-                            <div dangerouslySetInnerHTML={{ __html: renderedMD }}></div>
-                        </div>
+                    <Col xl={3.5} lg={3} md={2} sm={0} xs={0}></Col>
+                    <Col xl={5} lg={6} md={8} sm={12} xs={12} style={{ padding: 0, margin: 0 }}>
+                        <ScreenClassRender render={screenClass => (
+                            <div style={{ position: 'relative', paddingBottom: '6rem', padding: ['md', 'xl', 'lg'].includes(screenClass) ? '3rem 1.5rem' : '0 1.5rem', margin: 0, width: '100%', boxSizing: 'border-box' }}>
+                                <div dangerouslySetInnerHTML={{ __html: renderedMD }}></div>
+                            </div>
+                        )}>
+                        </ScreenClassRender>
                     </Col>
-                    <Col xl={3.5} sm={0} xs={0}>
-                        <Visible md lg xl>
+                    <Col xl={3.5} lg={3} md={2} sm={0} xs={0}>
+                        <Visible lg xl>
                             <div className='toc' style={{ position: scrollTop > 620 ? 'fixed' : 'relative', top: '4.5rem', borderLeft: '1px solid rgb(236, 236, 236)' }}>
                                 <span style={{ fontWeight: 'bold', marginLeft: '1rem' }}>Content</span>
                             </div>
                         </Visible>
-                        <Hidden md lg xl><div></div></Hidden>
+                        <Hidden lg xl><div></div></Hidden>
                     </Col>
                 </Row>
             </div>

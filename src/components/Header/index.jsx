@@ -90,7 +90,7 @@ class Header extends Component {
                 <div className={styles.Header} style={{ height: ['md', 'xl', 'lg'].includes(screenClass) ? '40rem' : '20rem', backgroundImage: `url("${imgUrl}")` }}>
                     <CSSTransition classNames={slideVertical} timeout={200} in={toolBarVisible} unmountOnExit>
                         < div className={styles.toolBar} style={{
-                            backgroundColor: `rgba(255, 255, 255, ${preScrollTop / 2000})`,
+                            backgroundColor: `rgba(255, 255, 255, ${preScrollTop / 20000})`,
                             borderBottom: `1px solid rgba(211, 211, 211, ${-0.2 + preScrollTop / 1000})`,
                             color: `rgb(${(1 - preScrollTop / 500) * 255}, ${(1 - preScrollTop / 500) * 255}, ${(1 - preScrollTop / 500) * 255}`
                         }}>
