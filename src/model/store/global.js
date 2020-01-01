@@ -1,4 +1,5 @@
 import { observable, computed, action } from 'mobx'
+import _ from 'lodash'
 
 class Global {
     @observable tags = []
@@ -62,7 +63,7 @@ class Global {
                 posts: posts.filter((post) => post.tags.filter((mTag) => mTag === tag).length > 0)
             })
         })
-        return tagedPosts
+        return _.shuffle(tagedPosts)
     }
 
     @action.bound
