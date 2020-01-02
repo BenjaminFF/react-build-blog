@@ -9,6 +9,10 @@ class Tags extends Component {
         super(props)
     }
 
+    componentWillMount() {
+        window.scrollTo(0, 0)
+    }
+
     componentDidMount() {
         this.hashLinkScroll()
     }
@@ -24,7 +28,7 @@ class Tags extends Component {
                 const id = hash.replace('#', '')
                 const element = document.getElementById(id)
                 if (element) element.scrollIntoView()
-            }, 10)
+            }, 60)
         }
     }
 

@@ -26,7 +26,7 @@ const routes = [
   {
     path: '/tags',
     name: 'tags',
-    exact: true,
+    exact: false,
     component: tags,
   },
   {

@@ -10,8 +10,13 @@ class Home extends Component {
         super(props)
     }
 
-    pushLink(pathname) {
+    componentWillMount() {
+        window.scrollTo(0, 0)
+    }
+
+    pushLink(pathname, e) {
         this.props.history.push({ pathname })
+        e.stopPropagation()
     }
 
     render() {
@@ -26,8 +31,9 @@ class Home extends Component {
                             <div key={index} className={styles.post} onClick={this.pushLink.bind(this, '/post/' + post.id)}>
                                 <div className={styles.title}>{post.title}</div>
                                 <div className={styles.description}>{post.description}</div>
+                                <div className={styles.date}>Posted on {post.date}</div>
                                 <div className={styles.tags}>{post.tags && post.tags.map((tag, index) => (
-                                    <p className={styles.tag} key={index}>{tag}</p>
+                                    <p className={styles.tag} key={index} onClick={this.pushLink.bind(this, '/tags/#' + encodeURIComponent(tag))}>{tag}</p>
                                 ))}</div>
                             </div>
                         ))}
@@ -48,7 +54,7 @@ class Home extends Component {
                     <Col xl={1.5} sm={12} xs={12} style={{ marginTop: '2.2rem', padding: '0 1rem', boxSizing: 'border-box' }}>
                         <div style={{ color: 'gray', marginBottom: '0.5rem', fontWeight: 'bold' }}>TAGS</div>
                         <div className={styles.tags}>{tags && tags.map((tag, index) => (
-                            <p className={styles.tag} key={index}>{tag}</p>
+                            <p className={styles.tag} key={index} onClick={this.pushLink.bind(this, '/tags/#' + encodeURIComponent(tag))}>{tag}</p>
                         ))}
                         </div>
                         <div style={{ width: '100%', height: '1px', backgroundColor: 'lightgray', marginTop: '2rem' }}></div>

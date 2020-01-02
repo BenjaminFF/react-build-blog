@@ -69,11 +69,13 @@ class Global {
     @action.bound
     goNewerPage() {
         this.curPage--
+        window.scrollTo(0, 0)
     }
 
     @action.bound
     goOlderPage() {
         this.curPage++
+        window.scrollTo(0, 0)
     }
 
     @action.bound

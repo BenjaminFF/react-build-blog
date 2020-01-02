@@ -27,22 +27,12 @@ class Header extends Component {
 
         imgUrl = imgUrl || imgUrls[Math.floor(imgUrls.length * Math.random())]
 
-        console.log(this.props)
-
         this.setState({
             imgUrl,
             preScrollTop: 0,
             menuVisible: false,
-            toolBarVisible: false
+            toolBarVisible: true
         })
-        setTimeout(() => {
-            let { hash } = this.props.location
-            if (!hash) {
-                this.setState({
-                    toolBarVisible: true
-                })
-            }
-        }, 10)
     }
 
     componentWillMount() {
@@ -51,8 +41,13 @@ class Header extends Component {
     }
 
     componentDidMount() {
-        this.props.history.listen(() => {
-            this.init()
+        this.props.history.listen((location) => {
+            if (location.pathname !== this.state.lPathname) {
+                this.init()
+                this.setState({
+                    lPathname: location.pathname
+                })
+            }
         })
     }
 
@@ -77,10 +72,13 @@ class Header extends Component {
     }
 
     pushLink(url) {
-        this.props.history.push(url)
-        this.setState({
-            menuVisible: !this.state.menuVisible
-        })
+        const { lPathname } = this.state
+        if (lPathname !== url) {
+            this.props.history.push(url)
+            this.setState({
+                menuVisible: !this.state.menuVisible
+            })
+        }
     }
 
     render() {
@@ -92,7 +90,7 @@ class Header extends Component {
                         < div className={styles.toolBar} style={{
                             backgroundColor: `rgba(255, 255, 255, ${preScrollTop / 20000})`,
                             borderBottom: `1px solid rgba(211, 211, 211, ${-0.2 + preScrollTop / 1000})`,
-                            color: `rgb(${(1 - preScrollTop / 500) * 255}, ${(1 - preScrollTop / 500) * 255}, ${(1 - preScrollTop / 500) * 255}`
+                            color: `rgb(${(1 - preScrollTop / 2000) * 255}, ${(1 - preScrollTop / 2000) * 255}, ${(1 - preScrollTop / 2000) * 255}`
                         }}>
                             <div className={styles.siteName}>{siteName}</div>
                             <Visible md lg xl>

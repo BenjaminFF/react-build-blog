@@ -29,6 +29,16 @@
       color: lightseagreen;
     }
   }
+
+  .date {
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: gray;
+    &:hover {
+      color: lightseagreen;
+    }
+  }
 }
 
 .bottomPaging {
