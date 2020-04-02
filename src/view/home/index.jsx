@@ -58,12 +58,12 @@ class Home extends Component {
                         ))}
                         </div>
                         <div style={{ width: '100%', height: '1px', backgroundColor: 'lightgray', marginTop: '2rem' }}></div>
-                        <div style={{ color: 'gray', marginTop: '2rem', marginBottom: '1rem', fontWeight: 'bold' }}>CATEGORIES</div>
+                        {/* <div style={{ color: 'gray', marginTop: '2rem', marginBottom: '1rem', fontWeight: 'bold' }}>CATEGORIES</div>
                         <ul className={styles.categories}>{categories && categories.map((item, index) => (
                             <li className={styles.category} key={index}>{item}</li>
                         ))}
-                        </ul>
-                        <div style={{ width: '100%', height: '1px', backgroundColor: 'lightgray', marginTop: '2rem' }}></div>
+                        </ul> */}
+                        {/* <div style={{ width: '100%', height: '1px', backgroundColor: 'lightgray', marginTop: '2rem' }}></div> */}
                     </Col>
                     <Col xl={3} sm={0} xs={0}>
                     </Col>

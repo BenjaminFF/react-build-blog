@@ -17,12 +17,12 @@ const routes = [
     exact: true,
     component: post,
   },
-  {
-    path: '/categories',
-    name: 'categories',
-    exact: true,
-    component: categories,
-  },
+  // {
+  //   path: '/categories',
+  //   name: 'categories',
+  //   exact: true,
+  //   component: categories,
+  // },
   {
     path: '/tags',
     name: 'tags',
