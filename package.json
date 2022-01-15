@@ -43,7 +43,7 @@
     "lodash": "^4.17.15",
     "lowdb": "^1.0.0",
     "markdown-toc": "^1.2.0",
-    "marked": "^0.8.0",
+    "marked": "^4.0.10",
     "mini-css-extract-plugin": "0.8.0",
     "mixin-deep": "^2.0.1",
     "mobx": "^5.15.1",
